@@ -1,0 +1,31 @@
+
+jwt:
+  secret: secret
+  expiration: 604800
+  header: Authorization
+
+# =========================
+# Perfil de desenvolvimento
+# =========================
+spring:
+  profiles:
+    active: dev
+welcomeString: helloDev
+
+---
+
+# ==================
+# Perfil de produção
+# ==================
+spring:
+  profiles: prod
+welcomeString: helloProd
+
+---
+
+# ===============
+# Perfil de teste
+# ===============
+spring:
+  profiles: test
+welcomeString: test
