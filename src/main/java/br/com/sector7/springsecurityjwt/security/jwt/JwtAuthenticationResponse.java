@@ -12,6 +12,11 @@ public class JwtAuthenticationResponse implements Serializable {
     private String token;
     private JwtUser jwtUser;
 
+    public JwtAuthenticationResponse(String token, JwtUser jwtUser) {
+        this.token = token;
+        this.jwtUser = jwtUser;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

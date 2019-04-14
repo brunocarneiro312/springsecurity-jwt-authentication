@@ -1,5 +1,6 @@
 package br.com.sector7.springsecurityjwt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -28,10 +29,11 @@ public class User implements Serializable {
     private String email;
 
     @Column(name = "PASSWORD", nullable = false)
-    @Size(min = 4, max = 50)
+    @Size(min = 4, max = 255)
     private String password;
 
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_AUTHORITIES",
             joinColumns = @JoinColumn(name = "ID_USER"),

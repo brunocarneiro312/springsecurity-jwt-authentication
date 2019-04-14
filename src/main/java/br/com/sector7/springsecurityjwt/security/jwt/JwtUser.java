@@ -1,5 +1,6 @@
 package br.com.sector7.springsecurityjwt.security.jwt;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,19 +9,19 @@ import java.util.Collection;
 public class JwtUser implements UserDetails {
 
     private Long id;
-    private String email;
+    private String username;
     private String password;
     private Collection<GrantedAuthority> authorities;
     private boolean enabled;
 
     public JwtUser(Long id,
-                   String email,
+                   String username,
                    String password,
                    Collection<GrantedAuthority> authorities,
                    boolean enabled) {
 
         this.id = id;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.enabled = enabled;
@@ -28,7 +29,7 @@ public class JwtUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
@@ -54,14 +55,7 @@ public class JwtUser implements UserDetails {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
