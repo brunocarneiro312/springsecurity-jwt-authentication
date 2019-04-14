@@ -2,6 +2,8 @@ package br.com.sector7.springsecurityjwt.security.jwt;
 
 import br.com.sector7.springsecurityjwt.security.jwt.service.JwtUserDetailService;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.SignatureException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,6 +118,9 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
                 }
                 catch (ExpiredJwtException e) {
                     logger.error("Token expirada.", e);
+                }
+                catch (SignatureException e) {
+                    logger.error("Token inválida", e);
                 }
             }
             else {
