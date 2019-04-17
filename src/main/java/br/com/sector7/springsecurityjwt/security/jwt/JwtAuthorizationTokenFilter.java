@@ -39,6 +39,9 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
     // Lista de URIs que serão ignoradas pelo filtro
     private static final String [] IGNORED_ASSETS = {
             "/h2-console",
+            "/swagger",
+            "/v2",
+            "/webjars",
             "/auth",
             ".css",
             ".gif",

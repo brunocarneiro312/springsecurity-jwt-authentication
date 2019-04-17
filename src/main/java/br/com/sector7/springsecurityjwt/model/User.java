@@ -1,7 +1,7 @@
 package br.com.sector7.springsecurityjwt.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.ColumnDefault;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -16,9 +16,25 @@ public class User implements Serializable {
 
     public static final long serialVersionUID = 1l;
 
+    public User() {
+
+    }
+
+    public User(
+            String email,
+            String password,
+            List<Authority> authorities,
+            boolean enabled) {
+
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+        this.enabled = enabled;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_user")
-    @SequenceGenerator(name = "seq_user", sequenceName = "seq_user")
+    @SequenceGenerator(name = "seq_user", sequenceName = "seq_user", initialValue = 3)
     @Column(name = "ID")
     private Long id;
 
@@ -60,10 +76,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
@@ -82,5 +100,16 @@ public class User implements Serializable {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", authorities=" + authorities +
+                ", enabled=" + enabled +
+                '}';
     }
 }
