@@ -15,6 +15,8 @@ import java.util.List;
  * ---------------
  * API de usuários
  * ---------------
+ * @author bruno.carneiro
+ * @since 04/2019
  */
 @RestController
 @RequestMapping(path = "/api/user", produces = MediaType.APPLICATION_JSON_VALUE)
