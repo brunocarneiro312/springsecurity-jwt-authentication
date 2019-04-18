@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.results.ResultMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -189,10 +190,10 @@ public class UserAPITest {
 
         // when
         Mockito.when(userService.buscarPorId(id)).thenReturn(new User());
-        Mockito.when(userService.deletar(Mockito.any(User.class))).thenReturn(user);
+        Mockito.when(userService.deletar(Mockito.any(User.class))).thenReturn(null); // Espera NO_CONTENT (204)
 
         ResultActions resultActions = mockMvc.perform(
-                MockMvcRequestBuilders.delete("/api/user/{userId}", 777L) // <- usuário com id 777 não existe
+                MockMvcRequestBuilders.delete("/api/user/{userId}", Mockito.anyLong())
                         .contentType(MediaType.APPLICATION_JSON_VALUE));
 
         // then
@@ -286,8 +287,40 @@ public class UserAPITest {
      * -------------------------------
      */
     @Test
-    public void findById() {
-        Assert.fail();
+    public void findById_200() throws Exception {
+
+        // given
+        Long id = 1L;
+        User user = new User();
+        user.setId(id);
+
+        // when
+        Mockito.when(this.userService.buscarPorId(Mockito.anyLong())).thenReturn(user);
+
+        ResponseEntity<User> responseUser = this.userAPI.findById(1L);
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/api/user/{userId}", id)
+                .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        // then
+        Assert.assertNotNull((responseUser));
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void findById_204() throws Exception {
+
+        // given
+        Long id = Mockito.anyLong();
+
+        // when
+        Mockito.when(this.userService.buscarPorId(id)).thenReturn(null); // Espera NO_CONTENT (204)
+
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/api/user/{userId}", id)
+                .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isNoContent());
+
     }
 
     /**
