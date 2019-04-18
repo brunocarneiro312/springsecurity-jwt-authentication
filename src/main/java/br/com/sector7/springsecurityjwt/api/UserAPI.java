@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ---------------
+ * API de usuários
+ * ---------------
+ */
 @RestController
 @RequestMapping(path = "/api/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserAPI {
@@ -22,6 +27,11 @@ public class UserAPI {
         this.userService = userService;
     }
 
+    /**
+     * -----------
+     * save [POST]
+     * -----------
+     */
     @PostMapping
     public ResponseEntity<User> save(@RequestBody User user) {
 
@@ -42,6 +52,11 @@ public class UserAPI {
 
     }
 
+    /**
+     * ---------------
+     * delete [DELETE]
+     * ---------------
+     */
     @DeleteMapping("/{userId}")
     public ResponseEntity<User> remove(@PathVariable("userId") Long id) {
 
@@ -62,6 +77,11 @@ public class UserAPI {
         return new ResponseEntity<>(responseUser, responseStatus);
     }
 
+    /**
+     * ------------
+     * update [PUT]
+     * ------------
+     */
     @PutMapping
     public ResponseEntity<User> update(@RequestBody User user) {
 
@@ -81,6 +101,11 @@ public class UserAPI {
         return new ResponseEntity<>(responseUser, responseStatus);
     }
 
+    /**
+     * -------------
+     * findOne [GET]
+     * -------------
+     */
     @GetMapping("/{userId}")
     public ResponseEntity<User> findById(@PathVariable("userId") Long id) {
 
@@ -100,6 +125,11 @@ public class UserAPI {
         return new ResponseEntity<>(responseUser, responseStatus);
     }
 
+    /**
+     * ----------
+     * list [GET]
+     * ----------
+     */
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
 
