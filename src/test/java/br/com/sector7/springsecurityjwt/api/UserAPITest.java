@@ -55,7 +55,9 @@ public class UserAPITest {
     }
 
     /**
+     * ------------------------------------
      * Teste de cadastramento de usuário OK
+     * ------------------------------------
      */
     @Test
     public void save_200() throws Exception {
@@ -88,7 +90,9 @@ public class UserAPITest {
     }
 
     /**
+     * -----------------------------------------------
      * Testa retorno vazio durante cadastro de usuário
+     * -----------------------------------------------
      */
     @Test
     public void save_204() throws Exception {
@@ -116,7 +120,9 @@ public class UserAPITest {
     }
 
     /**
+     * ----------------------------------------------------
      * Testa erro durante requisição de cadastro de usuário
+     * ----------------------------------------------------
      */
     @Test
     public void save_400() throws Exception {
@@ -141,7 +147,9 @@ public class UserAPITest {
     }
 
     /**
+     * ------------------------------
      * Teste de remoção de usuário OK
+     * ------------------------------
      */
     @Test
     public void remove_200() throws Exception {
@@ -168,7 +176,9 @@ public class UserAPITest {
     }
 
     /**
+     * --------------------------------
      * Teste de alteração de usuário OK
+     * --------------------------------
      */
     @Test
     public void update_200() throws Exception {
@@ -195,7 +205,9 @@ public class UserAPITest {
     }
 
     /**
+     * ---------------------------------------
      * Testa erro durante alteração de usuário
+     * ---------------------------------------
      */
     public void update_400() throws Exception {
         Assert.fail();
