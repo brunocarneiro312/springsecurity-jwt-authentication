@@ -21,6 +21,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * ---------------------------------
+ * Teste unitário de API de usuários
+ * ---------------------------------
+ * @author bruno.carneiro
+ * @since 04/2019
+ */
 public class UserAPITest {
 
     private UserAPI userAPI;
@@ -47,8 +54,11 @@ public class UserAPITest {
         }
     }
 
+    /**
+     * Teste de cadastramento de usuário OK
+     */
     @Test
-    public void save() throws Exception {
+    public void save_200() throws Exception {
 
         // given
         ResponseEntity<User> responseEntity;
@@ -78,11 +88,10 @@ public class UserAPITest {
     }
 
     /**
-     * Se não houver um retorno do usuário cadastrado (user == null),
-     * então deve retornar NO_CONTENT (204)
+     * Testa retorno vazio durante cadastro de usuário
      */
     @Test
-    public void save204() throws Exception {
+    public void save_204() throws Exception {
 
         // given
         ResponseEntity<User> responseEntity;
@@ -107,11 +116,10 @@ public class UserAPITest {
     }
 
     /**
-     * Se houver alguma inconsistência durante a requisição ao serviço,
-     * deve retornar status 400 (BAD_REQUEST)
+     * Testa erro durante requisição de cadastro de usuário
      */
     @Test
-    public void save400() throws Exception {
+    public void save_400() throws Exception {
 
         // given
         ResponseEntity<User> responseEntity;
@@ -132,8 +140,11 @@ public class UserAPITest {
 
     }
 
+    /**
+     * Teste de remoção de usuário OK
+     */
     @Test
-    public void remove() throws Exception {
+    public void remove_200() throws Exception {
 
         // given
         Long id = 2L;
@@ -156,8 +167,11 @@ public class UserAPITest {
 
     }
 
+    /**
+     * Teste de alteração de usuário OK
+     */
     @Test
-    public void update() throws Exception {
+    public void update_200() throws Exception {
 
         // given
         User user = new User();
@@ -178,8 +192,13 @@ public class UserAPITest {
 
         // then
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
-
+    /**
+     * Testa erro durante alteração de usuário
+     */
+    public void update_400() throws Exception {
+        Assert.fail();
     }
 
     @Test
