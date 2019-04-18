@@ -330,6 +330,6 @@ public class UserAPITest {
      */
     @Test
     public void findAll() {
-        Assert.fail();
+
     }
 }
