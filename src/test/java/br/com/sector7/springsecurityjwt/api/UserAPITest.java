@@ -176,6 +176,56 @@ public class UserAPITest {
     }
 
     /**
+     * ------------------------------------------------
+     * Teste de usuário não encontrado (204) ao remover
+     * ------------------------------------------------
+     */
+    @Test
+    public void remove_204() throws Exception {
+
+        // given
+        Long id = 2L;
+        User user = new User();
+
+        // when
+        Mockito.when(userService.buscarPorId(id)).thenReturn(new User());
+        Mockito.when(userService.deletar(Mockito.any(User.class))).thenReturn(user);
+
+        ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.delete("/api/user/{userId}", 777L) // <- usuário com id 777 não existe
+                        .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isNoContent());
+
+    }
+
+    /**
+     * --------------------------------
+     * Testando erro ao remover usuário
+     * --------------------------------
+     */
+    @Test
+    public void remove_400() throws Exception {
+
+        // given
+        Long id = 2L;
+        User user = new User();
+
+        // when
+        Mockito.when(userService.buscarPorId(id)).thenReturn(new User());
+        Mockito.when(userService.deletar(Mockito.any(User.class))).thenReturn(user);
+
+        ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.delete("/api/user/{userId}", "dois") // Passando parâmetro string ao invés de long
+                        .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+
+    }
+
+    /**
      * --------------------------------
      * Teste de alteração de usuário OK
      * --------------------------------
@@ -209,15 +259,42 @@ public class UserAPITest {
      * Testa erro durante alteração de usuário
      * ---------------------------------------
      */
+    @Test
     public void update_400() throws Exception {
-        Assert.fail();
+
+        // given
+        User user = new User();
+        user.setId(1L);
+        user.setEmail("errorupdate@sector7.com");
+        user.setPassword("<secret>");
+        user.setEnabled(true);
+
+        // when
+        Mockito.when(this.userService.alterar(Mockito.any(User.class))).thenReturn(user);
+
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.put("/api/user")
+                .contentType(MediaType.APPLICATION_JSON_VALUE));
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+
     }
 
+    /**
+     * -------------------------------
+     * Testando obtenção de usuário OK
+     * -------------------------------
+     */
     @Test
     public void findById() {
         Assert.fail();
     }
 
+    /**
+     * --------------------------------
+     * Testando listagem de usuários OK
+     * --------------------------------
+     */
     @Test
     public void findAll() {
         Assert.fail();

@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User alterar(User user) {
+        user = userRepository.findById(user.getId()).get();
         return userRepository.saveAndFlush(user);
     }
 
