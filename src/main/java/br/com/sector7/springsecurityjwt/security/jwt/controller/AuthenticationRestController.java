@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class AuthenticationRestController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());

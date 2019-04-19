@@ -186,7 +186,6 @@ public class UserAPITest {
 
         // given
         Long id = 2L;
-        User user = new User();
 
         // when
         Mockito.when(userService.buscarPorId(id)).thenReturn(new User());
@@ -320,7 +319,6 @@ public class UserAPITest {
 
         // then
         resultActions.andExpect(MockMvcResultMatchers.status().isNoContent());
-
     }
 
     /**
