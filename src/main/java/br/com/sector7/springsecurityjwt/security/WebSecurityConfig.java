@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Desabilitando proteção CSRF. A token JWT é invulnerável a esse tipo de ataque.
         http.csrf().disable();
+        http.cors();
 
         // Criando política de segurança da aplicação
         http.exceptionHandling()

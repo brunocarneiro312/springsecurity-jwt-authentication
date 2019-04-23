@@ -19,6 +19,7 @@ import java.util.List;
  * @since 04/2019
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "/api/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserAPI {
 
